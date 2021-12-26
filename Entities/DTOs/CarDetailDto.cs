@@ -16,7 +16,7 @@ namespace Entities.DTOs
         public decimal dailyPrice { get; set; }
       //  public DateTime returnDate { get; set; }    
       public string description { get; set; }
-
+        public int carId { get; set; }
 
     }
 }

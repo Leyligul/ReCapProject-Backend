@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities;
@@ -31,18 +33,19 @@ namespace Business.Concrete
             if (result.Success)
             {
                 _rentalDal.Add(rental);
-                Console.WriteLine("oldu Kenaaaaan");
+              
                 return new SuccessResult(Messages.Added);
 
             }
 
-            Console.WriteLine("olmadı");
+           
             return new ErrorResult(Messages.InvalidRequest);
         
 
 
         }
 
+      
         public IResult CheckReturnDate(int carId)
         {
 
@@ -54,15 +57,15 @@ namespace Business.Concrete
 
             else 
             {
-                return new ErrorResult();
+                return new ErrorResult(Messages.AlreadyRented);
             }
             
           
             
             
-        }
+         }
           
-
+       
 
 
          public IResult DeleteRental(Rental rental)

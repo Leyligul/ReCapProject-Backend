@@ -32,9 +32,9 @@ namespace WebAPI5.Controllers
             var result = _brandService.AddBrand(brand);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("upDate")]

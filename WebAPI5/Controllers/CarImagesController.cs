@@ -38,6 +38,17 @@ namespace WebAPI5.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getcarimagebycarid")]
+        public IActionResult GetCarImageByCarId(int carId)
+        {
+            var result = _carImageService.GetCarImageByCarId(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("update")]
         public IActionResult Update(IFormFile formFile, CarImage carImage)
         {

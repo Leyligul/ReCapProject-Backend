@@ -39,14 +39,16 @@ namespace Core.Utilities.Helpers
             if (!Directory.Exists(root))
             {
                 Directory.CreateDirectory(root);
+
             }
             string fileName = Guid.NewGuid().ToString();
 
             string fileExtension = Path.GetExtension(formFile.FileName);
-
+            //string a=Environment.CurrentDirectory
             string filePath = Path.Combine(root, fileName + fileExtension);
+           
 
-            using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
+            using (FileStream fileStream = new FileStream("wwwroot\\"+filePath, FileMode.Create))
             {
                 formFile.CopyTo(fileStream);
                 fileStream.Flush();

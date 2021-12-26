@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -21,6 +22,11 @@ namespace Business.Concrete
 
         public IResult AddBrand(Brand brand)
         {
+            IResult result = BusinessRules.Run(CheckBrandName(brand.brandName));
+            if (result != null)
+            {
+                return result; ;
+            }
             _brandDal.Add(brand);
             return new SuccessResult();
         }
@@ -45,6 +51,18 @@ namespace Business.Concrete
         {
             _brandDal.UpDate(brand);
             return new SuccessResult();
+        }
+
+
+
+        private IResult CheckBrandName(string brandName)
+        {
+            var result = _brandDal.GetAll(p => p.brandName == brandName);
+            if (result == null || result.Count == 0)
+            {
+                return new SuccessResult();
+            }
+            return new ErrorResult(Messages.BrandAlreadyExist);
         }
     }
 }

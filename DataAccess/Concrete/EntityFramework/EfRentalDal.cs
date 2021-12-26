@@ -35,6 +35,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  firstAndLastName=c.firstName+" "+c.lastName,
                                  rentDate=r.rentDate,
                                  returnDate=r.returnDate,
+                                
 
 
                              };

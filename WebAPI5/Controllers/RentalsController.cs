@@ -27,6 +27,7 @@ namespace WebAPI5.Controllers
             return BadRequest(result.Message);
         }
 
+       
         [HttpGet("getrentalbyid")]
         public IActionResult GetRentalById(int id)
         {
@@ -51,6 +52,7 @@ namespace WebAPI5.Controllers
 
         }
 
+        
 
         [HttpPost("add")]
         public IActionResult Add(Rental rental)
@@ -72,6 +74,18 @@ namespace WebAPI5.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+
+        [HttpGet("checkreturndate")]
+        public IActionResult checkReturnDate(int carId)
+        {
+            var result = _rentalService.CheckReturnDate(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
         }
 
         [HttpDelete("delete")]

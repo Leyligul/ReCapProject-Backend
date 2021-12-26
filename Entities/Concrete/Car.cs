@@ -19,6 +19,7 @@ namespace Entities.Concrete
         public string modelYear { get; set; }
         public decimal dailyPrice { get; set; }
         public string description { get; set; }
+      
 
     }
 

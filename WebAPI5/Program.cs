@@ -12,6 +12,7 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
@@ -68,6 +69,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
         };
+        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+        //JwtSecurityTokenHandler.MapInboundClaims = false;
     });
 builder.Services.AddDependencyResolvers(new ICoreModule[] 
 {new CoreModule()
@@ -79,6 +82,7 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
+app.UseStaticFiles();
 
 
 if (app.Environment.IsDevelopment())
@@ -86,6 +90,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.ConfigureCustomExceptionMiddleware();
 
 app.UseCors(builder=>builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 app.UseAuthorization();

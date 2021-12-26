@@ -19,4 +19,13 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Images\1902fb4a-e586-4e6d-bca3-1403605dec2a.jpg" />
+    <None Include="wwwroot\Images\5428559f-d27d-4405-ac75-0f0b20b18700.jpg" />
+    <None Include="wwwroot\Images\9402ecb0-8588-4a18-9312-4a6cba221cfe.png" />
+    <None Include="wwwroot\Images\a9102bb1-b63b-4d35-88bd-5ec0c620f304.png" />
+    <None Include="wwwroot\Images\b371d187-21de-4e3f-bee7-a2af94b53a21.jpg" />
+    <None Include="wwwroot\Images\d176e44c-1480-4d03-9614-a7c90e8936a5.jpg" />
+  </ItemGroup>
+
 </Project>

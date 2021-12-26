@@ -24,6 +24,15 @@ namespace Business.Constants
         public static string SuccessfulLogin = "Başarılı giriş";
         public static string UserAlreadyExists = "Kullanıcı mevcut.";
         public static string AccessTokenCreated = "Token oluşturuldu.";
+        public static string RequiredFieldError = "Lütfen tüm alanların dolu olduğundan emin olunuz.";
+        public static string SuccessfulPayment = "Ödemeniz başarılı şekilde gerçekleştirldi.";
+        public static string AlreadyRented = "Bu tarih aralığında araba zaten kiralanmıştır.";
+        public static string CardAdded = "Kart bilgileri kayıt edildi.";
+        public static string CardDeleted = "Kart bilgileri silindi.";
+        public static string CardUpDated = "Kart bilgileri güncellendi.";
+        public static string ColorAlreadyExist = "Bu renk zaten kayıtlı.";
+        public static string BrandAlreadyExist = "Bu marka zaten kayıtlı.";
+     
         //public static string CarImageAlreadyExist = "Bu fotoğraf zaten mevcut.";
     }
 }
