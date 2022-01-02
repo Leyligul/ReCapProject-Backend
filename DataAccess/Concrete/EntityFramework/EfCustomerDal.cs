@@ -30,7 +30,10 @@ namespace DataAccess.Concrete.EntityFramework
                                  userId = b.userId,
                                  firstName = b.firstName,
                                  lastName = b.lastName,
-                                 rentalId = r.id,
+                                 //rentalId = r.id,
+                                 companyName=a.companyName
+                                
+
                              };
                 return result.ToList();
             }

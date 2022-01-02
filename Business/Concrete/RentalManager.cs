@@ -27,43 +27,65 @@ namespace Business.Concrete
 
         public IResult AddRental(Rental rental)
         {
-            var result = CheckReturnDate(rental.carId);
+            //var result = CheckReturnDate(rental.carId);
 
 
-            if (result.Success)
-            {
-                _rentalDal.Add(rental);
-              
-                return new SuccessResult(Messages.Added);
+            //if (result.Success)
+            //{
+            //    _rentalDal.Add(rental);
 
-            }
+            //    return new SuccessResult(Messages.Added);
 
-           
-            return new ErrorResult(Messages.InvalidRequest);
-        
+            //}
 
+
+            //return new ErrorResult(Messages.InvalidRequest);
+
+            _rentalDal.Add(rental);
+
+            return new SuccessResult(Messages.Added);
 
         }
 
-      
-        public IResult CheckReturnDate(int carId)
+
+        //public IResult CheckReturnDate(int carId)
+        //{
+
+        //    var dataResult = GetRentalById(carId);
+        //    if(dataResult.Data == null || dataResult.Data.returnDate < DateTime.Now)
+        //    {
+        //        return new SuccessResult();
+        //    }
+
+        //    else 
+        //    {
+        //        return new ErrorResult(Messages.AlreadyRented);
+        //    }
+
+
+
+
+        // }
+
+        public IResult CheckRentDate(int carId, DateTime rentDate,DateTime returnDate)
         {
-
-            var dataResult = GetRentalById(carId);
-            if(dataResult.Data == null || dataResult.Data.returnDate < DateTime.Now)
+            var result = GetRentalById(carId);
+            if (result.Data==null)
             {
-                return new SuccessResult();
+                return result;
             }
-
-            else 
+            else
             {
-                return new ErrorResult(Messages.AlreadyRented);
+                if (rentDate > result.Data?.returnDate && returnDate> DateTime.Now)
+                {
+                    return new SuccessResult(Messages.DateisOk);
+                }
+                else
+                {
+                    return new ErrorResult(Messages.DateisNotOk);
+                }
             }
-            
-          
-            
-            
-         }
+        }
           
        
 

@@ -11,6 +11,7 @@ namespace Business.Abstract
     public interface ICardService
     {
         IDataResult<List<Card>> GetAll();
+         IDataResult<Card> GetCardByUserId(int userId);
         IResult AddCard(Card card);
         IResult DeleteCard(Card card);
 

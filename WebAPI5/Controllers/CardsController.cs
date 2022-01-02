@@ -24,7 +24,20 @@ namespace WebAPI5.Controllers
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
+        }
+
+
+
+        [HttpGet("getcardbyuserid")]
+        public IActionResult GetCardByUserId(int userId)
+        {
+            var result = _cardService.GetCardByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpPost("add")]
@@ -33,9 +46,9 @@ namespace WebAPI5.Controllers
             var result = _cardService.AddCard(card);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("upDate")]

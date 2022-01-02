@@ -21,7 +21,7 @@ namespace WebAPI5.Controllers
             var result=_paymentService.Pay(card);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             return BadRequest(result);
         }

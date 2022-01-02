@@ -37,6 +37,13 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Card>>(_cardDal.GetAll(), Messages.Listed);
         }
 
+        public IDataResult<Card> GetCardByUserId(int userId)
+        {
+
+            return new SuccessDataResult<Card>(_cardDal.Get(p => p.userId == userId));
+
+        }
+
         public IResult UpDateCard(Card card)
         {
 

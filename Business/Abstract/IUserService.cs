@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,13 @@ namespace Business.Abstract
     {
         //IDataResult<List<User>> GetAll();
         //IResult AddUser(User user);
-        //IResult UpDateUser(User user);
+        IResult UpDateUser(UserDto userDto);
         //IResult DeleteUser(User user);
 
         IDataResult<List<OperationClaim>> GetClaims(User user);
         IResult AddUser(User user);
         IDataResult<User> GetByMail(string email);
+        IResult ChangeUserPassword(PasswordUpDateDto passwordUpDateDto);
     }
 
 

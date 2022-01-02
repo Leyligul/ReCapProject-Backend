@@ -60,9 +60,9 @@ namespace WebAPI5.Controllers
             var result = _rentalService.AddRental(rental);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("upDate")]
@@ -76,10 +76,23 @@ namespace WebAPI5.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("checkreturndate")]
-        public IActionResult checkReturnDate(int carId)
+        //[HttpGet("checkreturndate")]
+        //public IActionResult checkReturnDate(int carId)
+        //{
+        //    var result = _rentalService.CheckReturnDate(carId);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result);
+
+        //}
+
+
+        [HttpGet("checkrentdate")]
+        public IActionResult checkRentDate(int carId,DateTime rentDate,DateTime returnDate)
         {
-            var result = _rentalService.CheckReturnDate(carId);
+            var result=_rentalService.CheckRentDate(carId,rentDate,returnDate);
             if (result.Success)
             {
                 return Ok(result);
@@ -87,6 +100,11 @@ namespace WebAPI5.Controllers
             return BadRequest(result);
 
         }
+
+
+
+
+
 
         [HttpDelete("delete")]
         public IActionResult Delete(Rental rental)

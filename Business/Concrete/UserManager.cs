@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
+using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,10 +61,44 @@ namespace Business.Concrete
         //    return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.Listed);
         //}
 
-        //public IResult UpDateUser(User user)
-        //{
-        //    _userDal.UpDate(user);
-        //    return new SuccessResult();
-        //}
+
+       // [ValidationAspect(typeof(UserValidator))]
+        public IResult UpDateUser(UserDto userDto)
+        {
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(userDto.password, out passwordHash, out passwordSalt);
+            var user = new User
+            { 
+                userId = userDto.userId,
+                mail = userDto.mail,
+                firstName = userDto.firstName,
+                lastName = userDto.lastName,
+                passwordHash = passwordHash,
+                passwordSalt = passwordSalt,
+                status = true
+            };
+
+            _userDal.UpDate(user);
+            return new SuccessResult();
+        }
+
+        public IResult ChangeUserPassword(PasswordUpDateDto passwordUpDateDto)
+        {
+            byte[] passwordHash, passwordSalt;
+            var userToCheck = GetByMail(passwordUpDateDto.Email);
+            //if (userToCheck.Data == null)
+            //{
+            //    return new ErrorResult(Messages.UserNotFound);
+            //}
+            if (!HashingHelper.VerifyPasswordHash(passwordUpDateDto.OldPassword, userToCheck.Data.passwordHash, userToCheck.Data.passwordHash))
+            {
+                return new ErrorResult(Messages.PasswordError);
+            }
+            HashingHelper.CreatePasswordHash(passwordUpDateDto.NewPassword, out passwordHash, out passwordSalt);
+            userToCheck.Data.passwordHash = passwordHash;
+            userToCheck.Data.passwordSalt = passwordSalt;
+            _userDal.UpDate(userToCheck.Data);
+            return new SuccessResult(Messages.PasswordChanged);
+        }
     }
 }
