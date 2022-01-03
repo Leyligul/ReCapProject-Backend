@@ -32,8 +32,8 @@ namespace Business.Constants
         public static string CardUpDated = "Kart bilgileri güncellendi.";
         public static string ColorAlreadyExist = "Bu renk zaten kayıtlı.";
         public static string BrandAlreadyExist = "Bu marka zaten kayıtlı.";
-        public static string DateisOk = "Tarihler ok";
-        public static string DateisNotOk = "Seçilen ilk tarihi büyültün.";
+        public static string DateisOk = "Tarihler uygun seçildi.";
+        public static string DateisNotOk = "Seçilen tarihleri büyültün.";
         public static string PasswordChanged = "Parola güncellendi.";
 
         //public static string CarImageAlreadyExist = "Bu fotoğraf zaten mevcut.";
