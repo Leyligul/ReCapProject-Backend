@@ -26,6 +26,13 @@ namespace Business.Concrete
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
+
+            var userExist = _userService.GetByMail(userForRegisterDto.Email);
+            if (!userExist.Success)
+            {
+                return new ErrorDataResult<User>(userExist.Message);
+            }
+
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
             var user = new User
@@ -57,14 +64,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(userToCheck.Data, Messages.SuccessfulLogin);
         }
 
-        public IResult UserExists(string email)
-        {
-            if (_userService.GetByMail(email).Data!=null)
-            {
-                return new ErrorResult(Messages.UserAlreadyExists);
-            }
-            return new SuccessResult();
-        }
+     
 
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {

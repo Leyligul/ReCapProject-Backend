@@ -12,23 +12,17 @@ namespace WebAPI5.Controllers
     public class AuthController : ControllerBase
     {
 
-
         IAuthService _authService;
         public AuthController(IAuthService authService)
         {
             _authService = authService;
+
         }
 
         [HttpPost("register")]
         public IActionResult Register(UserForRegisterDto userForRegisterDto)
         {
-            var userExist = _authService.UserExists(userForRegisterDto.Email);
-            if (!userExist.Success)
-            {
-                return BadRequest(userExist.Message);
-            }
-
-            var userResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
+           var userResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
             var createToken = _authService.CreateAccessToken(userResult.Data);
             if (createToken.Success)
             {

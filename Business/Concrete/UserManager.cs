@@ -44,24 +44,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(u => u.mail == email));
         }
 
-        //public IResult AddUser(User user)
-        //{
-        //    _userDal.Add(user);
-        //    return new SuccessResult();
-        //}
-
-        //public IResult DeleteUser(User user)
-        //{
-        //    _userDal.Delete(user);
-        //    return new SuccessResult();
-        //}
-
-        //public IDataResult<List<User>> GetAll()
-        //{
-        //    return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.Listed);
-        //}
-
-
+     
        // [ValidationAspect(typeof(UserValidator))]
         public IResult UpDateUser(UserDto userDto)
         {
